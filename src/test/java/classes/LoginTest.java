@@ -1,7 +1,5 @@
 package classes;
 
-import com.codeborne.selenide.Configuration;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -12,10 +10,10 @@ import static org.openqa.selenium.By.id;
 
 public class LoginTest {
 
-    @BeforeClass
-    public static void setUp(){
-        Configuration.baseUrl = "https://app.qase.io";
-    }
+//    @BeforeClass
+//    public static void setUp(){
+//        Configuration.baseUrl = "https://app.qase.io";
+//    }
 
     @Test
     public void testLogin() {
