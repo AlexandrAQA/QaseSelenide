@@ -23,6 +23,8 @@
         <lombok.version>1.18.24</lombok.version>
         <javafaker.version>1.0.2</javafaker.version>
         <selenide.version>6.11.2</selenide.version>
+        <selenide-core.version>6.11.2</selenide-core.version>
+        <selenide-testng.version>6.11.2</selenide-testng.version>
         <org.assertj.version>3.24.2</org.assertj.version>
     </properties>
 
@@ -77,7 +79,17 @@
             <artifactId>assertj-core</artifactId>
             <version>${org.assertj.version}</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide-core -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-core</artifactId>
+            <version>${selenide-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-testng</artifactId>
+            <version>${selenide-testng.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -119,6 +131,8 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>${aspectj.version}</version>
                     </dependency>
+
+
                 </dependencies>
 
             </plugin>
