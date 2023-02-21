@@ -1,4 +1,4 @@
-package classes;
+package classes.selenide;
 
 import com.aqa.LoginPage;
 import com.codeborne.selenide.testng.ScreenShooter;
