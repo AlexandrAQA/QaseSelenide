@@ -26,6 +26,7 @@
         <selenide-core.version>6.11.2</selenide-core.version>
         <selenide-testng.version>6.11.2</selenide-testng.version>
         <org.assertj.version>3.24.2</org.assertj.version>
+        <io.rest-assured.version>5.3.0</io.rest-assured.version>
     </properties>
 
     <dependencies>
@@ -89,6 +90,12 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide-testng</artifactId>
             <version>${selenide-testng.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${io.rest-assured.version}</version>
         </dependency>
 
     </dependencies>
