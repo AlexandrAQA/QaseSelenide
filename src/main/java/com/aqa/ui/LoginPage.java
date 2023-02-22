@@ -1,4 +1,4 @@
-package com.aqa;
+package com.aqa.ui;
 
 import com.codeborne.selenide.Selenide;
 
