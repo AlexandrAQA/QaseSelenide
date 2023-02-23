@@ -1,5 +1,7 @@
 package classes.rest;
 
+import com.aqa.model.Category;
+import com.aqa.model.Pet;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -10,6 +12,12 @@ public class PetTest {
 
     @Test
     public void createPetTest(){
+        Pet.builder()
+                .name("Pet Test Name")
+                .category(Category.builder()
+                                    .name("Test Name")
+                                    .build());
+
         //POST Pet
         long id = given().
                 contentType(ContentType.JSON).
