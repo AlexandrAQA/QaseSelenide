@@ -27,6 +27,7 @@
         <selenide-testng.version>6.11.2</selenide-testng.version>
         <org.assertj.version>3.24.2</org.assertj.version>
         <io.rest-assured.version>5.3.0</io.rest-assured.version>
+        <gson.version>2.10.1</gson.version>
     </properties>
 
     <dependencies>
@@ -97,6 +98,13 @@
             <artifactId>rest-assured</artifactId>
             <version>${io.rest-assured.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
 
     </dependencies>
 
