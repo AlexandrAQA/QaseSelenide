@@ -16,7 +16,7 @@ public class PetTest {
     @Test
     public void createPetTest(){
         final Pet expectedPet = Pet.builder()
-                             .name("Pet Test Name")
+                             .name("MyTestDog2")
                              .category(Category.builder()
                                                .name("Test Category")
                                                .build())
@@ -30,24 +30,7 @@ public class PetTest {
         long id = given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
-                body("{\n" +
-                            "  \"id\": 0,\n" +
-                            "  \"category\": {\n" +
-                            "    \"id\": 0,\n" +
-                            "    \"name\": \"Test Name2\"\n" +
-                            "  },\n" +
-                            "  \"name\": \"MyTestDog2\",\n" +
-                            "  \"photoUrls\": [\n" +
-                            "    \"https://ss.sport-express.ru/userfiles/materials/186/1868235/large.jpg\"\n" +
-                            "  ],\n" +
-                            "  \"tags\": [\n" +
-                            "    {\n" +
-                            "      \"id\": 0,\n" +
-                            "      \"name\": \"Test\"\n" +
-                            "    }\n" +
-                            "  ],\n" +
-                            "  \"status\": \"available\"\n" +
-                            "}").
+                body(expectedPet).
                log().all().
        when().
                post("https://petstore.swagger.io/v2/pet")

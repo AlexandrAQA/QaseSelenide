@@ -1,6 +1,6 @@
 package classes.selenide;
 
-import com.aqa.LoginPage;
+import com.aqa.ui.LoginPage;
 import com.codeborne.selenide.testng.ScreenShooter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
