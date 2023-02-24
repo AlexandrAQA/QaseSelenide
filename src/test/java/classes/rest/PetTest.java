@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.mapper.ObjectMapperType.GSON;
 import static org.hamcrest.Matchers.*;
 
 public class PetTest {
@@ -30,7 +31,7 @@ public class PetTest {
         long id = given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
-                body(expectedPet).
+                body(expectedPet, GSON).
                log().all().
        when().
                post("https://petstore.swagger.io/v2/pet")
