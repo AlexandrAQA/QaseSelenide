@@ -1,13 +1,11 @@
 package com.aqa.model;
 
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor()
 @Builder
 public class Category {
     public int id;
