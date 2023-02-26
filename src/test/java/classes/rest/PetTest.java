@@ -27,11 +27,11 @@ public class PetTest {
                              .status(available)
                              .build();
         //POST Pet
-        Pet actualPet = given().
+        Pet postActualPet = given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
                 body(expectedPet, GSON).
-               log().all().
+               log().ifValidationFails().
        when().
                post("https://petstore.swagger.io/v2/pet")
       .then().
@@ -40,27 +40,27 @@ public class PetTest {
                 extract().
                              body().as(Pet.class); //extract actualPet from the response
 
-        assertThat(actualPet).as("The Pet is not matched expected Pet")
+        assertThat(postActualPet).as("The Pet is not matched expected Pet")
                              .usingRecursiveComparison()
                              .ignoringFields("id")
                              .isEqualTo(expectedPet);
-        assertThat(actualPet.getId()).as("The \"id\" is not generated")
+        assertThat(postActualPet.getId()).as("The \"id\" is not generated")
                                      .isNotNull()
                                      .isNotEqualTo(0);
 
 
         //GET PET /pet/{petId}
-        given().
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                log().all().
-                pathParam("petId",actualPet.getId()).
-        when().
-                get("https://petstore.swagger.io/v2/pet/{petId}")
-        .then().
-                statusCode(200).
-                log().body().
-                log().status(); //check status code
+        final Pet getActualPet = given().
+                                        contentType(ContentType.JSON).
+                                        accept(ContentType.JSON).
+                                        log().ifValidationFails().
+                                        pathParam("petId", postActualPet.getId()).
+                                 when().
+                                        get("https://petstore.swagger.io/v2/pet/{petId}")
+                                .then().
+                                        statusCode(200).
+                                extract().
+                                        body().as(Pet.class);//check status code
 
     }
 }
