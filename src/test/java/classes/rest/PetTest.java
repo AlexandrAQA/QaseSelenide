@@ -5,12 +5,11 @@ import com.aqa.model.Pet;
 import com.aqa.model.Tag;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
 import static com.aqa.model.Status.available;
 import static io.restassured.RestAssured.given;
 import static io.restassured.mapper.ObjectMapperType.GSON;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetTest {
 
@@ -41,7 +40,16 @@ public class PetTest {
                 extract().
                              body().as(Pet.class); //extract actualPet from the response
 
-    //GET PET /pet/{petId}
+        assertThat(actualPet).as("The Pet is not matched expected Pet")
+                             .usingRecursiveComparison()
+                             .ignoringFields("id")
+                             .isEqualTo(expectedPet);
+        assertThat(actualPet.getId()).as("The \"id\" is not generated")
+                                     .isNotNull()
+                                     .isNotEqualTo(0);
+
+
+        //GET PET /pet/{petId}
         given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
