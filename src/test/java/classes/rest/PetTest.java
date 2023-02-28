@@ -31,7 +31,7 @@ public class PetTest {
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
                 body(expectedPet, GSON).
-               log().ifValidationFails().
+                log().ifValidationFails().
        when().
                post("https://petstore.swagger.io/v2/pet")
       .then().
@@ -40,17 +40,11 @@ public class PetTest {
                 extract().
                              body().as(Pet.class); //extract actualPet from the response
 
-        assertThat(postActualPet).as("The Pet is not matched expected Pet")
-                             .usingRecursiveComparison()
-                             .ignoringFields("id")
-                             .isEqualTo(expectedPet);
-        assertThat(postActualPet.getId()).as("The \"id\" is not generated")
-                                     .isNotNull()
-                                     .isNotEqualTo(0);
+        assertPet(expectedPet, postActualPet);
 
 
         //GET PET /pet/{petId}
-        final Pet getActualPet = given().
+        Pet getActualPet = given().
                                         contentType(ContentType.JSON).
                                         accept(ContentType.JSON).
                                         log().ifValidationFails().
@@ -61,6 +55,18 @@ public class PetTest {
                                         statusCode(200).
                                 extract().
                                         body().as(Pet.class);//check status code
+        assertPet(expectedPet,getActualPet);
 
+
+    }
+
+    private void assertPet(Pet expectedPet, Pet postActualPet) {
+        assertThat(postActualPet).as("The Pet is not matched expected Pet")
+                                 .usingRecursiveComparison()
+                                 .ignoringFields("id")
+                                 .isEqualTo(expectedPet);
+        assertThat(postActualPet.getId()).as("The \"id\" is not generated")
+                                         .isNotNull()
+                                         .isNotEqualTo(0);
     }
 }
