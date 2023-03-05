@@ -36,7 +36,7 @@ public class PetTest {
                post("https://petstore.swagger.io/v2/pet")
       .then().
               statusCode(200). //check status code
-                log().all(). //to see logs
+                log().ifValidationFails(). //to see logs
                 extract().
                              body().as(Pet.class); //extract actualPet from the response
 
