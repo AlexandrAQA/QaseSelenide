@@ -1,4 +1,4 @@
-package classes.rest;
+package classes.rest.dto;
 
 import com.aqa.model.Category;
 import com.aqa.model.Pet;
