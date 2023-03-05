@@ -1,17 +1,21 @@
 package classes.rest.dto;
 
+import classes.rest.clientApi.PetApiClient;
 import com.aqa.model.Category;
 import com.aqa.model.Pet;
 import com.aqa.model.Tag;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
+
 import java.util.List;
+
 import static com.aqa.model.Status.available;
 import static io.restassured.RestAssured.given;
-import static io.restassured.mapper.ObjectMapperType.GSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetTest {
+
+    PetApiClient petApiClient = new PetApiClient();
 
     @Test
     public void createPetTest(){
@@ -27,18 +31,7 @@ public class PetTest {
                              .status(available)
                              .build();
         //POST Pet
-        Pet postActualPet = given().
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                body(expectedPet, GSON).
-                log().ifValidationFails().
-       when().
-               post("https://petstore.swagger.io/v2/pet")
-      .then().
-              statusCode(200). //check status code
-                log().ifValidationFails(). //to see logs
-                extract().
-                             body().as(Pet.class); //extract actualPet from the response
+        Pet postActualPet = petApiClient.postPet(expectedPet); //extract actualPet from the response
 
         assertPet(expectedPet, postActualPet);
 
