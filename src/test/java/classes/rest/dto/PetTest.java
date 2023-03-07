@@ -4,13 +4,11 @@ import classes.rest.clientApi.PetApiClient;
 import com.aqa.model.Category;
 import com.aqa.model.Pet;
 import com.aqa.model.Tag;
-import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static com.aqa.model.Status.available;
-import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetTest {
@@ -32,23 +30,13 @@ public class PetTest {
                              .build();
         //POST Pet
         Pet postActualPet = petApiClient.postPet(expectedPet); //extract actualPet from the response
-
         assertPet(expectedPet, postActualPet);
 
 
         //GET PET /pet/{petId}
-        Pet getActualPet = given().
-                                        contentType(ContentType.JSON).
-                                        accept(ContentType.JSON).
-                                        log().ifValidationFails().
-                                        pathParam("petId", postActualPet.getId()).
-                                 when().
-                                        get("https://petstore.swagger.io/v2/pet/{petId}")
-                                .then().
-                                        statusCode(200).
-                                extract().
-                                        body().as(Pet.class);//check status code
-        assertPet(expectedPet,getActualPet);
+        Pet getActualPet = petApiClient.getPet(postActualPet.getId());
+        //check status code
+        assertPet(expectedPet, getActualPet);
 
 
     }

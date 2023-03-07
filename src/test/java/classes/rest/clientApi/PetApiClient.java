@@ -20,6 +20,28 @@ public class PetApiClient {
                 log().ifValidationFails(). //to see logs
                 extract().
                 body().as(Pet.class);
-
     }
+
+    public Pet getPet(long petId){
+        return given().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                log().ifValidationFails().
+                pathParam("petId", petId).
+                when().
+                get("https://petstore.swagger.io/v2/pet/{petId}")
+                .then().
+                statusCode(200).
+                extract().
+                body().as(Pet.class);
+    }
+
+
+
+
+
+
+
+
+
 }
