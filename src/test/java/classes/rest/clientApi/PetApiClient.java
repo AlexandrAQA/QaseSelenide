@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 
-public class PetApiClient {
+public class PetApiClient extends BaseApiClient{
 
     public Pet postPet(Pet pet){
         return given().
