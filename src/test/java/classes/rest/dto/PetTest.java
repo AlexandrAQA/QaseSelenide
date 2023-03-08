@@ -29,7 +29,7 @@ public class PetTest {
                              .status(available)
                              .build();
         //POST Pet
-        Pet postActualPet = petApiClient.postPet(expectedPet); //extract actualPet from the response
+        Pet postActualPet = petApiClient.post(expectedPet); //extract actualPet from the response
         assertPet(expectedPet, postActualPet);
 
 
