@@ -3,6 +3,8 @@ package classes.rest.clientApi;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class BaseApiClient {
@@ -20,4 +22,20 @@ public class BaseApiClient {
                 extract().
                 response();
     }
+
+    public Response get (String uri, Map<String, ?> parameterNameValuePairs){
+        return given().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                log().ifValidationFails().
+                pathParams(parameterNameValuePairs)
+                .when()
+                .get("https://petstore.swagger.io/" + uri)
+                .then().
+                log().ifValidationFails(). //to see logs
+                extract().
+                response();
+    }
+
+
 }
