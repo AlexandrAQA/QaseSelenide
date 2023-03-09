@@ -14,10 +14,12 @@ public class BaseApiClient {
     RequestSpecification requestSpecification;
 
     public BaseApiClient(){
+        //RestAssured.basePath = "https://petstore.swagger.io/";
         requestSpecification = given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
-                log().ifValidationFails();
+                log().ifValidationFails().
+                basePath("https://petstore.swagger.io/");
     }
 
 
