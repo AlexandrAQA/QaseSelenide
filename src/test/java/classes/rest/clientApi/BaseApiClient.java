@@ -24,10 +24,9 @@ public class BaseApiClient {
 
 
     public Response post(String uri, Object body){
-        return requestSpecification.
-                body(body).
-                 when().
-                post("https://petstore.swagger.io/" + uri)
+        return requestSpecification.body(body).
+                when().
+                post(uri)
                 .then().
                 log().ifValidationFails(). //to see logs
                 extract().
