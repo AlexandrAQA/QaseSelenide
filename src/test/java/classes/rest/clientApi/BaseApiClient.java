@@ -16,20 +16,17 @@ public class BaseApiClient {
     public BaseApiClient(){
         //RestAssured.basePath = "https://petstore.swagger.io/";
         requestSpecification = given().
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                log().ifValidationFails().
-                basePath("https://petstore.swagger.io/");
+                                        contentType(ContentType.JSON).
+                                        accept(ContentType.JSON).
+                                        log().ifValidationFails().
+                                        basePath("https://petstore.swagger.io/");
     }
 
 
     public Response post(String uri, Object body){
-        return given().
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
+        return requestSpecification.
                 body(body).
-                log().ifValidationFails().
-                when().
+                 when().
                 post("https://petstore.swagger.io/" + uri)
                 .then().
                 log().ifValidationFails(). //to see logs
