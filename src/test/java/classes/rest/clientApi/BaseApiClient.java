@@ -15,36 +15,33 @@ public class BaseApiClient {
 
     public BaseApiClient(){
         //RestAssured.basePath = "https://petstore.swagger.io/";
-        requestSpecification = given().
-                                        contentType(ContentType.JSON).
-                                        accept(ContentType.JSON).
-                                        log().ifValidationFails().
-                                        basePath("https://petstore.swagger.io/");
+        requestSpecification = given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .log().ifValidationFails()
+                .basePath("https://petstore.swagger.io/");
     }
 
 
     public Response post(String uri, Object body){
-        return requestSpecification.body(body).
-                when().
-                post(uri)
-                .then().
-                log().ifValidationFails(). //to see logs
-                extract().
-                response();
+        return requestSpecification.body(body)
+                                   .when()
+                                   .post(uri)
+                                   .then()
+                                   .log().ifValidationFails() //to see logs
+                                   .extract()
+                                   .response();
     }
 
     public Response get (String uri, Map<String, ?> parameterNameValuePairs){
-        return given().
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                log().ifValidationFails().
-                pathParams(parameterNameValuePairs)
+        return requestSpecification
+                .pathParams(parameterNameValuePairs)
                 .when()
-                .get("https://petstore.swagger.io/" + uri)
-                .then().
-                log().ifValidationFails(). //to see logs
-                extract().
-                response();
+                .get(uri)
+                .then()
+                .log().ifValidationFails() //to see logs
+                .extract()
+                .response();
     }
 
 
