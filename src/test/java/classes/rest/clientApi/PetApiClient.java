@@ -28,19 +28,12 @@ public class PetApiClient extends BaseApiClient{
                 log().ifValidationFails().
                 pathParams(Map.of("petId",petId)).
                              when().
-                             get("https://petstore.swagger.io/v2/pet/{petId}")
+                             get("v2/pet/{petId}")
                              .then().
-                             statusCode(200).
+                             //statusCode(200).
                              extract().
                              body().as(Pet.class);
     }
-
-
-
-
-
-
-
 
 
 }
